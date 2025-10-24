@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button'
 </script>
 <template>
 	<div>
-	<Button>Click me</Button>
+		<Button as-child>
+			<a href="https://www.google.com">Google</a>
+		</Button>
 	</div>
 </template>
