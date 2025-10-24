@@ -1,5 +1,5 @@
 {
-  "name": "my-vue-app_prueba2",
+  "name": "shadcn-vue",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.15",
+    "@vueuse/core": "^14.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.546.0",
