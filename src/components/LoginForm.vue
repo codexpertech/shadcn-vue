@@ -5,10 +5,36 @@
   import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
   import { Input } from '@/components/ui/input';
   import { Label } from '@/components/ui/label';
+  import { useForm } from 'vee-validate'
+
+  import {
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+  } from '@/components/ui/form'
+
+  import { toTypedSchema } from '@vee-validate/zod'
+  import * as z from 'zod'
+
+  const formSchema = toTypedSchema(z.object({
+    email: z.string().email('Cuenta de correo electrónico no válida.'),
+    password: z.string().min(8),
+  }))
+
+  const form = useForm({
+    validationSchema: formSchema,
+  })
 
   const props = defineProps<{
     class?: HTMLAttributes['class'];
   }>();
+
+const onSubmit = form.handleSubmit((values) => {
+  console.log('Form submitted!', values)
+})
 </script>
 
 <template>
@@ -19,21 +45,39 @@
         <CardDescription> Enter your email below to login to your account </CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form @submit="onSubmit">
           <div class="flex flex-col gap-6">
-            <div class="grid gap-3">
-              <Label for="email">Email</Label>
-              <Input id="email" type="email" placeholder="m@example.com" required />
-            </div>
-            <div class="grid gap-3">
-              <div class="flex items-center">
-                <Label for="password">Password</Label>
-                <a href="#" class="ml-auto inline-block text-sm underline-offset-4 hover:underline">
-                  Forgot your password?
-                </a>
-              </div>
-              <Input id="password" type="password" required />
-            </div>
+            <FormField v-slot="{ componentField }" name="email">
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input type="email" v-bind="componentField" />
+                  </FormControl>
+                  <FormMessage />
+                  <FormDescription>
+                    Correo electrónico público, como tu cuenta de Gmail.
+                  </FormDescription>
+                </FormItem>
+              </FormField>
+
+              <FormField v-slot="{ componentField }" name="password">
+                <FormItem>
+                  <div class="flex items-center">
+                    <FormLabel for="password">Password</FormLabel>
+                    <a href="#" class="ml-auto inline-block text-sm underline-offset-4 hover:underline">
+                      Forgot your password?
+                    </a>
+                  </div>
+                  <FormControl>
+                    <Input type="password" v-bind="componentField" />
+                  </FormControl>
+                  <FormMessage />
+                  <FormDescription>
+                    Contraseña de al menos 8 caracteres.
+                  </FormDescription>
+                </FormItem>
+              </FormField>
+              
             <div class="flex flex-col gap-3">
               <Button type="submit" class="w-full"> Login </Button>
               <Button variant="outline" class="w-full"> Login with Google </Button>

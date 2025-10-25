@@ -38,8 +38,9 @@
 
 </script>
 <template>
-  <!--<LoginForm class="m-5" />-->
+  <LoginForm class="m-5" />
 
+  <!-- 
   <Alert>
     <Rocket class="h-4 w-4" />
     <AlertTitle>Heads up!</AlertTitle>
@@ -70,7 +71,7 @@
   </AlertDialog>
 
   <br/>
-  
+
   <Dialog>
     <DialogTrigger as-child>
       <Button variant="outline">
@@ -105,5 +106,5 @@
       </DialogFooter>
     </DialogContent>
   </Dialog>
-
+-->
 </template>
