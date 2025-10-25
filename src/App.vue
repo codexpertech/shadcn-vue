@@ -1,3 +1,4 @@
+<!--
 <script setup lang="ts">
   import LoginForm from './components/LoginForm.vue';
   import { Rocket } from 'lucide-vue-next'
@@ -106,5 +107,19 @@
       </DialogFooter>
     </DialogContent>
   </Dialog>
--->
+</template>-->
+
+<!-- Sidebar -->
+<script setup lang="ts">
+import AppSidebar from '@/components/AppSidebar.vue'
+import { SidebarProvider } from '@/components/ui/sidebar'
+</script>
+
+<template>
+  <SidebarProvider>
+    <AppSidebar />
+    <main>
+      <RouterView />
+    </main>
+  </SidebarProvider>
 </template>
